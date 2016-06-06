@@ -21,10 +21,19 @@ class TypeheadController extends Controller {
 	}
 
 
+	/**
+	 * This method is prone to expections in Product::search, if exception is thrown,
+	 * error saying "Serialization of 'Closure' is not allowed".
+	 * In that case, the real culprit is ->getProducts() and it's derived products->search()
+	 *
+	 * @param int $minutes
+	 * @return mixed
+	 */
 	public function products($minutes = 60)
 	{
-		return Cache::remember('sanatorium.typehead.products', $minutes, function() 
+		return Cache::remember('sanatorium.typehead.products', $minutes, function()
 		{
+			dd($this->getProducts());
 			return $this->getProducts();
 		    
 		});
@@ -53,7 +62,7 @@ class TypeheadController extends Controller {
 			$results[] = [
 				'title' => $element->product_title,
 				'subtitle' => $element->price_vat,
-				'image' => $element->coverThumb(60,60),
+				'image' => $element->coverThumb(),
 				'url' => $element->url
 			];
 		}

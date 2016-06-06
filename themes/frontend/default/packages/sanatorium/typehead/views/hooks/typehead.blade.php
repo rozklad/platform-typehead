@@ -25,7 +25,8 @@
 }
 
 .tt-menu {
-  width: 100%;
+  left: 0;
+  right: 0;
   background-color: #fff;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
@@ -34,10 +35,26 @@
 .tt-menu .row {
 	margin-left: 0;
 	margin-right: 0;
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.tt-menu .image {
+	width: 60px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.tt-menu .content {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: left;
+	width: 100%;
 }
 
 .tt-suggestion {
-  padding: 3px 20px;
+  padding: 3px 0px;
 }
 
 .tt-suggestion:hover {
@@ -53,22 +70,15 @@
   margin: 0;
 }
 
-#custom-templates .empty-message {
-	padding: 5px 10px;
-	text-align: center;
+.twitter-typeahead .empty-message {
+	padding: 10px 20px;
+	text-align: left;
 }
 .input-group .twitter-typeahead {
 	width: 100%;
 }
 .input-group .twitter-typeahead {
 	display: table-cell!important;
-}
-
-.tt-suggestion .col-xs-2 img {
-	max-width: 100%;
-}
-.tt-suggestion .col-xs-2 .col-xs-10 {
-	padding-left: 2em;
 }
 
 .navbar-form .input-group .twitter-typeahead>.form-control, .navbar-form .input-group .twitter-typeahead>input {
@@ -100,6 +110,11 @@ $(function(){
 			'<div class="empty-message">',
 			'{{ trans('sanatorium/typehead::messages.no_results') }}',
 			'</div>'
+			].join('\n'),
+			pending: [
+				'<div class="empty-message">',
+				'{{ trans('sanatorium/typehead::messages.pending') }}',
+				'</div>'
 			].join('\n'),
 			suggestion: Handlebars.compile('@include('sanatorium/typehead::hooks/partials/typehead')')
 		}

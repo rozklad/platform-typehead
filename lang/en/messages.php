@@ -2,5 +2,6 @@
 
 return [
 
-	'no_results' => 'Nebyly nalezeny odpovídající produkty'
+	'no_results' => 'No results were found',
+	'pending' => 'Searching...',
 ];
