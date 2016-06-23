@@ -33,7 +33,7 @@ class TypeheadController extends Controller {
 	{
 		return Cache::remember('sanatorium.typehead.products', $minutes, function()
 		{
-			dd($this->getProducts());
+
 			return $this->getProducts();
 		    
 		});
